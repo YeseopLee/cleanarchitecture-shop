@@ -10,6 +10,8 @@ import com.example.cleanarchitecture_shop.databinding.FragmentProfileBinding
 import com.example.cleanarchitecture_shop.extensions.toast
 import com.example.cleanarchitecture_shop.presentation.BaseFragment
 import com.example.cleanarchitecture_shop.presentation.adapter.ProductListAdapter
+import com.example.cleanarchitecture_shop.presentation.detail.ProductDetailActivity
+import com.example.cleanarchitecture_shop.presentation.main.MainActivity
 import com.example.cleanarchitecture_shop.presentation.profile.ProfileViewModel
 import org.koin.android.ext.android.inject
 
@@ -29,7 +31,9 @@ internal class ProductListFragment: BaseFragment<ProductListViewModel, FragmentP
     private val startProductDetailForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             result: ActivityResult ->
-             //성공적으로 처리 완료 이후 동작
+             if (result.resultCode == ProductDetailActivity.PRODUCT_ORDERED_RESULT_CODE) {
+                 (requireActivity() as MainActivity).viewModel.refreshOrderList()
+             }
         }
 
     override fun observeData() {
@@ -74,9 +78,9 @@ internal class ProductListFragment: BaseFragment<ProductListViewModel, FragmentP
             emptyResultTextView.isGone = true
             recyclerView.isGone = false
             adapter.setProductList(state.productList) {
-//                startProductDetailForResult.launch(
-//                    ProductDetailActivity.newIntent(requireContext(), it.id)
-//                )
+                startProductDetailForResult.launch(
+                    ProductDetailActivity.newIntent(requireContext(), it.id)
+                )
                 requireContext().toast("Product Entity : $it")
             }
         }
