@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1081996531286",
+    "project_id": "clean-shop-98229",
+    "storage_bucket": "clean-shop-98229.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081996531286:android:b21970bdcda7cd06e00df7",
+        "android_client_info": {
+          "package_name": "com.example.cleanarchitecture_shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1081996531286-23f0h37ou1ji7duc9s78n8dgtar7a181.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cleanarchitecture_shop",
+            "certificate_hash": "9855089efd28cab42a72f158902169db1da30232"
+          }
+        },
+        {
+          "client_id": "1081996531286-t2qnofdsjm32vt8m0mg5shpklfo9elk3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJQ7LdNeKm_LqTXgG5WvYKmUpgC1pS3ZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1081996531286-t2qnofdsjm32vt8m0mg5shpklfo9elk3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,8 +6,12 @@ import com.example.cleanarchitecture_shop.data.network.buildOkHttpClient
 import com.example.cleanarchitecture_shop.data.network.provideGsonConverterFactory
 import com.example.cleanarchitecture_shop.data.network.provideProductApiService
 import com.example.cleanarchitecture_shop.data.network.provideProductRetrofit
+import com.example.cleanarchitecture_shop.data.preference.PreferenceManager
 import com.example.cleanarchitecture_shop.data.repository.DefaultProductRepository
 import com.example.cleanarchitecture_shop.data.repository.ProductRepository
+import com.example.cleanarchitecture_shop.domain.product.*
+import com.example.cleanarchitecture_shop.domain.product.DeleteOrderedProductListUseCase
+import com.example.cleanarchitecture_shop.domain.product.GetOrderedProductListUseCase
 import com.example.cleanarchitecture_shop.domain.product.GetProductItemUseCase
 import com.example.cleanarchitecture_shop.domain.product.GetProductListUseCase
 import com.example.cleanarchitecture_shop.domain.product.OrderProductItemUseCase
@@ -17,6 +21,7 @@ import com.example.cleanarchitecture_shop.presentation.main.MainViewModel
 import com.example.cleanarchitecture_shop.presentation.profile.ProfileViewModel
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -26,7 +31,7 @@ val appModule = module {
     // ViewModels
     viewModel { MainViewModel() }
     viewModel { ProductListViewModel(get()) }
-    viewModel { ProfileViewModel() }
+    viewModel { ProfileViewModel(get(), get(), get()) }
     viewModel { (productId:Long) -> ProductDetailViewModel(productId, get(), get()) }
 
     // Coroutine Dispatcher
@@ -40,6 +45,8 @@ val appModule = module {
     factory { GetProductItemUseCase(get()) }
     factory { GetProductListUseCase(get()) }
     factory { OrderProductItemUseCase(get())}
+    factory { GetOrderedProductListUseCase(get()) }
+    factory { DeleteOrderedProductListUseCase(get()) }
 
     single { provideGsonConverterFactory() }
 
@@ -49,8 +56,11 @@ val appModule = module {
 
     single { provideProductApiService(get())}
 
+    single { PreferenceManager(androidContext())}
+
     // Database
     single { provideDB(androidApplication())}
     single { provideToDoDao(get())}
+
 
 }
